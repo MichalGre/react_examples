@@ -1,0 +1,24 @@
+.members-container{
+    width:420px;
+    margin: 10px auto;
+    background-color: #e2f9db;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  .members-container table{
+    border-collapse: collapse;
+    background-color: white;
+    overflow: hidden;
+    width: 100%;
+    border-radius: 10px;
+  }
+  .members-container th, td{
+    text-align: left;
+    font-size: 12px;
+    padding: 10px;
+  }
+  .members-container th {
+    background-color: #7691ab;
+    color: white;
+  }
+  

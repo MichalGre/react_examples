@@ -1,14 +1,20 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import AlertModal from "./AlertModal";
 import classes from "./InputForm.module.css";
 
 const InputForm = (props) => {
-  const [enteredName, setEnteredName] = useState("");
-  const [enteredAge, setEnteredAge] = useState("");
+  const nameInputRef = useRef();
+  const ageInputRef = useRef();
+
+  // const [enteredName, setEnteredName] = useState("");
+  // const [enteredAge, setEnteredAge] = useState("");
   const [error, setError] = useState();
 
   let onSubmit = (event) => {
     event.preventDefault();
+    const enteredName = nameInputRef.current.value;
+    const enteredAge = ageInputRef.current.value;
+
     if (+enteredAge <= 0 || +enteredAge > 150) {
       setError("Invalid entered age");
     } else if (enteredName.trim() === "") {
@@ -21,35 +27,27 @@ const InputForm = (props) => {
         age: enteredAge,
         name: enteredName,
       });
-
-      setEnteredName("");
-      setEnteredAge("");
+      nameInputRef.current.value = "";
+      ageInputRef.current.value = "";
     }
   };
 
   function onModalClose() {
     setError(false);
   }
-  let onEnteredName = (event) => {
-    setEnteredName(event.target.value);
-  };
-  let onEnteredAge = (event) => {
-    setEnteredAge(event.target.value);
-  };
+
   return (
     <div className={classes["form-container"]}>
       <h1>Add member</h1>
       <form onSubmit={onSubmit}>
         <input
+          ref={nameInputRef}
           v-model="name"
-          value={enteredName}
-          onChange={onEnteredName}
           placeholder="Enter your name"
         />
         <input
+          ref={ageInputRef}
           v-model="age"
-          value={enteredAge}
-          onChange={onEnteredAge}
           type="number"
           placeholder="Enter your age"
         />
